@@ -65,8 +65,8 @@ def writenum(number,digit,blank,ledon):
             time.sleep_us(1)
         else:
             time.sleep_us(1)
-            p21.value(0)
-            p22.value(0)
+            p21.value(1)
+            p22.value(1)
             time.sleep_us(1)
     
     spibuf = bytearray(1)
