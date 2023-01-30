@@ -112,6 +112,7 @@ while True:
         
     average = average/20#scale back a little
     potentiometer_value = (average - 44400) * (40 - 0) / (49800 - 44400) + 0
+    potentiometer_value = 40-potentiometer_value
     #the line above ic copied from the arduino source, it is the map() function
     #(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     #you can tune the displayed values by adjusting the in_min and in_max according to the values
