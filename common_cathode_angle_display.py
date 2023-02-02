@@ -109,10 +109,17 @@ while True:
             sum = sum + (potentiometer.read_u16()>>4)
         result = sum>>6    
         average = average + result
-        
+    array_for_correction = [1.2,1.5,1.5,1.4,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,1]    
     average = average/20#scale back a little
     potentiometer_value = (average - 44400) * (40 - 0) / (49800 - 44400) + 0
     potentiometer_value = 40-potentiometer_value
+    if int(potentiometer_value) >40:
+        potentiometer_value = 40
+    temp = potentiometer_value*array_for_correction[int(potentiometer_value)]
+    potentiometer_value = temp
     #the line above ic copied from the arduino source, it is the map() function
     #(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     #you can tune the displayed values by adjusting the in_min and in_max according to the values
