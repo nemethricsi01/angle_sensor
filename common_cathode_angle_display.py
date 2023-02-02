@@ -11,7 +11,6 @@ p22 = Pin(22, Pin.OUT)    # create output pin on GPIO0
 # construct a SoftSPI bus on the given pins
 # polarity is the idle state of SCK
 # phase=0 means sample on the first edge of SCK, phase=1 means the second
-
 p20.value(1)
 spi = SPI(0, 10_000_000)  # Default assignment: sck=Pin(10), mosi=Pin(11), miso=Pin(8)
 spi.init(baudrate=200000) # set the baudrate
@@ -20,8 +19,6 @@ counter = 0
 blank_counter = 0
 blank = 0
 average = 0
-
-
 def handleInterrupt(timer):#timer interrupt handler
     
     global counter#variable to hold info on which digit is being displayed
@@ -109,17 +106,10 @@ while True:
             sum = sum + (potentiometer.read_u16()>>4)
         result = sum>>6    
         average = average + result
-    array_for_correction = [1.2,1.5,1.5,1.4,1,1,1,1,1,1,
-                        1,1,1,1,1,1,1,1,1,1,
-                        1,1,1,1,1,1,1,1,1,1,
-                        1,1,1,1,1,1,1,1,1,1,1]    
+
     average = average/20#scale back a little
     potentiometer_value = (average - 44400) * (40 - 0) / (49800 - 44400) + 0
     potentiometer_value = 40-potentiometer_value
-    if int(potentiometer_value) >40:
-        potentiometer_value = 40
-    temp = potentiometer_value*array_for_correction[int(potentiometer_value)]
-    potentiometer_value = temp
     #the line above ic copied from the arduino source, it is the map() function
     #(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     #you can tune the displayed values by adjusting the in_min and in_max according to the values
@@ -142,4 +132,4 @@ while True:
         
         
         
-        
+  
