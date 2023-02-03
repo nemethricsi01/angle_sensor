@@ -111,17 +111,18 @@ while True:
         average = average + result
         
     average = average/20#scale back a little
-    potentiometer_value = (average - 420) * (40 - 0) / (27100 - 420) + 0
-    
+    potentiometer_value = (average - 54500) * (40 - 0) / (43025 - 54500) + 0
+    print("raw value:         %.2f"%(average))
+    print("calc value before correction:  %d"%(int(potentiometer_value)))
     pot_value = 0
     if (potentiometer_value >=0) and(potentiometer_value <11):
-        pot_value = (average - 420) * (10 - 0) / (5310 - 420) + 0
+        pot_value = (average - 54500) * (10 - 0) / (51080 - 54500) + 0
     if (potentiometer_value >=10) and(potentiometer_value <21):
-        pot_value = (average - 5310) * (20 - 12) / (13800 - 5310) + 12
+        pot_value = (average - 51080) * (20 - 12) / (47650 - 51080) + 10
     if (potentiometer_value >=20) and(potentiometer_value <31):
-        pot_value = (average - 13800) * (30 - 20) / (20000 - 13800) + 20
+        pot_value = (average - 47650) * (30 - 20) / (44900 - 47650) + 20
     if (potentiometer_value >=30) and(potentiometer_value <41):
-        pot_value = (average - 20000) * (40 - 30) / (27200 - 20000) + 30   
+        pot_value = (average - 44900) * (40 - 30) / (43025 - 44900) + 30  
         
     #the line above ic copied from the arduino source, it is the map() function
     #(x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
